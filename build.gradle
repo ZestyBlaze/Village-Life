@@ -1,0 +1,70 @@
+plugins {
+	id 'fabric-loom' version '1.2-SNAPSHOT'
+	id 'maven-publish'
+}
+
+version = project.mod_version
+group = project.maven_group
+
+repositories {
+	maven { url "https://maven.parchmentmc.org" }
+	maven { url "https://maven.nucleoid.xyz" }
+}
+
+dependencies {
+	minecraft "com.mojang:minecraft:${project.minecraft_version}"
+	mappings loom.layered() {
+		officialMojangMappings()
+		parchment("org.parchmentmc.data:parchment-1.19.3:2023.03.12@zip")
+	}
+	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+
+	modImplementation include("eu.pb4:polymer-core:${project.polymer_version}")
+	modImplementation include("eu.pb4:polymer-resource-pack:${project.polymer_version}")
+	modImplementation include("eu.pb4:polymer-virtual-entity:${project.polymer_version}")
+	modImplementation include("eu.pb4:polymer-networking:${project.polymer_version}")
+
+	modImplementation include("eu.pb4:sgui:${project.sgui_version}")
+	modImplementation include("xyz.nucleoid:server-translations-api:${project.translation_version}")
+}
+
+base {
+	archivesName = project.archives_base_name
+}
+
+processResources {
+	inputs.property "version", project.version
+
+	filesMatching("fabric.mod.json") {
+		expand "version": project.version
+	}
+}
+
+tasks.withType(JavaCompile).configureEach {
+	it.options.release = 17
+}
+
+java {
+	withSourcesJar()
+
+	sourceCompatibility = JavaVersion.VERSION_17
+	targetCompatibility = JavaVersion.VERSION_17
+}
+
+jar {
+	from("LICENSE") {
+		rename { "${it}_${base.archivesName.get()}"}
+	}
+}
+
+publishing {
+	publications {
+		mavenJava(MavenPublication) {
+			from components.java
+		}
+	}
+
+	repositories {
+	}
+}
