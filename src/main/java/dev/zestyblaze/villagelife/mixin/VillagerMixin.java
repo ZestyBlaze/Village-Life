@@ -8,6 +8,8 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 
 @Mixin(Villager.class)
 public interface VillagerMixin {
-    @Accessor
-    EntityDataAccessor<VillagerData> getDATA_VILLAGER_DATA();
+    @Accessor("DATA_VILLAGER_DATA")
+    static EntityDataAccessor<VillagerData> getVillagerData() {
+        throw new AssertionError();
+    }
 }

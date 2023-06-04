@@ -47,6 +47,6 @@ public class SmartVillagerMob extends PathfinderMob implements PolymerEntity {
 
     @Override
     public void modifyRawTrackedData(List<SynchedEntityData.DataValue<?>> data, ServerPlayer player, boolean initial) {
-        data.add(SynchedEntityData.DataValue.create(((VillagerMixin)this).getDATA_VILLAGER_DATA(), new VillagerData(VillagerType.JUNGLE, VillagerProfession.FARMER, 3)));
+        data.add(SynchedEntityData.DataValue.create(VillagerMixin.getVillagerData(), new VillagerData(VillagerType.JUNGLE, VillagerProfession.FARMER, 3)));
     }
 }
