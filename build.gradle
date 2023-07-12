@@ -9,6 +9,17 @@ group = project.maven_group
 repositories {
 	maven { url "https://maven.parchmentmc.org" }
 	maven { url "https://maven.nucleoid.xyz" }
+	exclusiveContent {
+		forRepository {
+			maven {
+				name = "Modrinth"
+				url = "https://api.modrinth.com/maven"
+			}
+		}
+		filter {
+			includeGroup "maven.modrinth"
+		}
+	}
 }
 
 dependencies {
@@ -27,6 +38,8 @@ dependencies {
 
 	modImplementation include("eu.pb4:sgui:${project.sgui_version}")
 	modImplementation include("xyz.nucleoid:server-translations-api:${project.translation_version}")
+
+	modImplementation "maven.modrinth:nexusframe:${project.nexusframe_version}"
 }
 
 base {
