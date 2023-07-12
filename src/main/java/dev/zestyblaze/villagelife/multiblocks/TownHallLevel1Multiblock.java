@@ -30,7 +30,8 @@ public class TownHallLevel1Multiblock {
         HashMap<Character, Predicate<BlockState>> predicates = new HashMap<>();
         predicates.put('a', BlockStatePredicate.forBlock(Blocks.AIR));
         predicates.put('c', BlockStatePredicate.forBlock(Blocks.COBBLESTONE));
-        predicates.put('s', BlockStatePredicate.forBlock(Blocks.COBBLESTONE_STAIRS).where(StairBlock.FACING, Predicates.equalTo(Direction.EAST)).where(StairBlock.HALF, Predicates.equalTo(Half.BOTTOM)));
+        //predicates.put('s', BlockStatePredicate.forBlock(Blocks.COBBLESTONE_STAIRS).where(StairBlock.FACING, Predicates.equalTo(Direction.EAST)).where(StairBlock.HALF, Predicates.equalTo(Half.BOTTOM)));
+        predicates.put('s', BlockStatePredicate.forBlock(Blocks.COBBLESTONE_STAIRS));
         predicates.put('$', BlockStatePredicate.forBlock(Blocks.ANVIL));
         return predicates;
     }
